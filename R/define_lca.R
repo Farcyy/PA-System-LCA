@@ -8,7 +8,7 @@
 #' A name for the analysis. Please choose a meaningful short name that will also be used for constructing subfolders needed for the files. Date and time will be added to the name automatically.
 #' @param id_variable Variable in data frame that contains the unique ids for samples. Will not be included in the analysis.
 #' @param weight_variable Variable that contains weightings for all samples in the data set (optional).
-#' @param nclasses The maximum number of classes the LCA should be performed for.
+#' @param nclasses The maximum number ofbrew install libxml2 classes the LCA should be performed for.
 #' @param starts Number of random starts for each class and model type. It is advisable to use numbers of the form 2^X*10. Must be provided either as single integer or in the form of a List with six entries for the 6 model types, each entry comprising an integer vector of length nclasses.
 #' @param cores The number of cores to use when performing the LCA.
 #' @param use Character vector with all variables in the data frame used for the LCA. All other variables will be saved as auxiliary variables in the LCA and not used for computing.
