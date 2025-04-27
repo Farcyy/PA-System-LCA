@@ -1,0 +1,63 @@
+[[init]]
+iterators = classes;
+classes = 1:4;
+classname#classes = 01 02 03 04;
+filename = "[[classname#classes]]_LCA_full_pairs_model1_lca.inp";
+outputDirectory = "LCA_full_pairs_model1_lca";
+[[/init]]
+
+TITLE: LCA_full_pairs[[classes]] classes
+DATA: FILE IS LCA_full_pairs_model1_lca.dat;
+
+VARIABLE:
+NAMES = id TS_YN LA_YN DEL_YN CA_YN SW_type SW_pos3 SW_BR SW_GR SW_EF TS_PAIR LA_PAIR SW_PAIR SW_pcat;
+IDVARIABLE = id;
+USEVARIABLES = TS_PAIR LA_PAIR SW_PAIR DEL_YN SW_type CA_YN;
+CATEGORICAL = DEL_YN SW_type CA_YN;
+COUNT = TS_PAIR (p) SW_PAIR (p) LA_PAIR (nbi);
+AUXILIARY = TS_YN LA_YN SW_pos3 SW_BR SW_GR SW_EF SW_pcat;
+MISSING = .;
+CLASSES = class ([[classes]]);
+
+MODEL:
+%CLASS#1%
+[ LA_PAIR#1 ];
+[[classes > 1]]
+%CLASS#2%
+[ LA_PAIR#1 ];
+[[/classes > 1]]
+[[classes > 2]]
+%CLASS#3%
+[ LA_PAIR#1 ];
+[[/classes > 2]]
+[[classes > 3]]
+%CLASS#4%
+[ LA_PAIR#1 ];
+[[/classes > 3]]
+
+ANALYSIS:
+TYPE = MIXTURE;
+PROCESSORS = 12;
+[[classes = 1]]
+STITERATIONS = 50;
+STARTS = 250 50;
+[[/classes = 1]]
+[[classes = 2]]
+STITERATIONS = 50;
+STARTS = 250 50;
+[[/classes = 2]]
+[[classes = 3]]
+STITERATIONS = 50;
+STARTS = 250 50;
+[[/classes = 3]]
+[[classes = 4]]
+STITERATIONS = 50;
+STARTS = 250 50;
+[[/classes = 4]]
+
+OUTPUT:
+SVALUES ENTROPY TECH1 TECH4;
+PLOT: TYPE=PLOT1 PLOT2 PLOT3;
+SAVEDATA:
+FILE IS LCA_full_pairs_model1_lca_[[classes]].dat
+SAVE = cprobabilites bchweights;
