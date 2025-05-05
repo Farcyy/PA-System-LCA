@@ -130,8 +130,8 @@ write.csv(d1, "data/LCA_Input.csv")
 
 var_sets <- list(
   minimal      = c("LA_YN", "DEL_YN", "SW_type", "CA_YN"),
-  sw_detailed  = c("LA_YN", "SW_pcat", "DEL_YN", "SW_type", "CA_YN"),
-  full_pairs   = c("TS_PAIR","LA_PAIR","SW_PAIR","DEL_YN","SW_type","CA_YN")
+  sw_detailed  = c("LA_YN", "SW_pcat", "DEL_YN", "SW_type", "SW_pos3"),
+  full_pairs   = c("TS_PAIR","LA_PAIR","SW_PAIR","DEL_YN","SW_type","SW_pos3")
 )
 
 # ──────────────────────────────────────────────────────────────
@@ -146,7 +146,7 @@ lca_all <- imap(var_sets, function(vars, set_name) {
       analysis_name = paste0("LCA_", set_name),
       id_variable   = "id",
       nclasses      = 4,
-      starts        = 250,
+      starts        = 4000,
       cores         = 12,
       use           = vars,
       categorical   = setdiff(vars, c("TS_PAIR","LA_PAIR","SW_PAIR")),
@@ -160,7 +160,7 @@ lca_all <- imap(var_sets, function(vars, set_name) {
       analysis_name = paste0("LCA_", set_name),
       id_variable   = "id",
       nclasses      = 4,
-      starts        = 250,
+      starts        = 4000,
       cores         = 12,
       use           = vars,
       categorical   = vars
