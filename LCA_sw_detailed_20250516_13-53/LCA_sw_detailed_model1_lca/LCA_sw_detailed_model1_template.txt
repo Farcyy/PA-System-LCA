@@ -1,0 +1,47 @@
+[[init]]
+iterators = classes;
+classes = 1:4;
+classname#classes = 01 02 03 04;
+filename = "[[classname#classes]]_LCA_sw_detailed_model1_lca.inp";
+outputDirectory = "LCA_sw_detailed_model1_lca";
+[[/init]]
+
+TITLE: LCA_sw_detailed[[classes]] classes
+DATA: FILE IS LCA_sw_detailed_model1_lca.dat;
+
+VARIABLE:
+NAMES = id TS_YN LA_YN DEL_YN CA_YN SW_type SW_pos3 SW_BR SW_GR SW_EF TS_PAIR LA_PAIR SW_PAIR SW_pcat;
+IDVARIABLE = id;
+USEVARIABLES = LA_YN SW_pcat DEL_YN SW_type SW_pos3;
+CATEGORICAL = LA_YN SW_pcat DEL_YN SW_type SW_pos3;
+AUXILIARY = TS_YN CA_YN SW_BR SW_GR SW_EF TS_PAIR LA_PAIR SW_PAIR;
+MISSING = .;
+CLASSES = class ([[classes]]);
+
+
+ANALYSIS:
+TYPE = MIXTURE;
+PROCESSORS = 12;
+[[classes = 1]]
+STITERATIONS = 800;
+STARTS = 4000 800;
+[[/classes = 1]]
+[[classes = 2]]
+STITERATIONS = 800;
+STARTS = 4000 800;
+[[/classes = 2]]
+[[classes = 3]]
+STITERATIONS = 800;
+STARTS = 4000 800;
+[[/classes = 3]]
+[[classes = 4]]
+STITERATIONS = 800;
+STARTS = 4000 800;
+[[/classes = 4]]
+
+OUTPUT:
+SVALUES ENTROPY TECH1 TECH4;
+PLOT: TYPE=PLOT1 PLOT2 PLOT3;
+SAVEDATA:
+FILE IS LCA_sw_detailed_model1_lca_[[classes]].dat
+SAVE = cprobabilites bchweights;
